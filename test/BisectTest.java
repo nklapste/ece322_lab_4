@@ -121,7 +121,7 @@ public class BisectTest {
     @Test(expected = Bisect.RootNotFound.class)
     public void test_RootNotFoundDuringIter() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // no loops
-        // throws immediately
+        // throws RootNotFound immediately
         bisect.run(1, 2);
     }
 
@@ -136,6 +136,7 @@ public class BisectTest {
     public void test_MaxIterationsPassed2() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // too many loops
         // throws MaxIterationsPassed after do loop
+        // set max iterations to be 1 this "ensures" that a MaxIterationsPassed exception should be thrown
         bisect.setMaxIterations(1);
         bisect.run(-2, 2);
     }
@@ -157,6 +158,29 @@ public class BisectTest {
         double result = bisect.run(2, -2);
         assertEquals(1, result, bisect.getTolerance());
     }
+
+    @Test
+    public void test_IterX2X1MidHighTol() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x2 = mid
+        // 2. x1 = mid
+        // setting the tolerance to be high
+        bisect.setTolerance(0.1);
+        double result = bisect.run(2, -2);
+        assertEquals(1, result, bisect.getTolerance());
+    }
+
+    @Test
+    public void test_IterX2X1MidLowTol() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x2 = mid
+        // 2. x1 = mid
+        // setting the tolerance to be low
+        bisect.setTolerance(0.000000000001);
+        double result = bisect.run(2, -2);
+        assertEquals(1, result, bisect.getTolerance());
+    }
+
 
     @Test
     public void test_IterX1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
