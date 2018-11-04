@@ -181,7 +181,6 @@ public class BisectTest {
         assertEquals(1, result, bisect.getTolerance());
     }
 
-
     @Test
     public void test_IterX1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // one loop
@@ -195,6 +194,26 @@ public class BisectTest {
         // two loops
         // 1. x1 = mid
         // 2. x2 = mid
+        double result = bisect.run(-2, 1);
+        assertEquals(1, result, bisect.getTolerance());
+    }
+
+    @Test
+    public void test_IterX1X2MidHighTol() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x1 = mid
+        // 2. x2 = mid
+        bisect.setTolerance(0.1);
+        double result = bisect.run(-2, 1);
+        assertEquals(1, result, bisect.getTolerance());
+    }
+
+    @Test
+    public void test_IterX1X2MidLowTol() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x1 = mid
+        // 2. x2 = mid
+        bisect.setTolerance(0.000000000001);
         double result = bisect.run(-2, 1);
         assertEquals(1, result, bisect.getTolerance());
     }
