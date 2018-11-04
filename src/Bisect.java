@@ -47,11 +47,13 @@ public class Bisect {
    }
 
 
-   public double run(double x1, double x2) throws RootNotFound {
+   public double run(double x1, double x2) throws RootNotFound, MaxIterationsPassed {
 	   
       int iterNum = 1;
       double f1, f2, fmid;
       double mid = 0;
+
+      // alteration of sourcecode for easier coverage testing validation
        while (true){
 
            f1 = func.eval(x1);
@@ -99,7 +101,7 @@ public class Bisect {
 //      } while (Math.abs(x1 - x2) / 2 >= tolerance && Math.abs(fmid) > tolerance && iterNum <= maxIterations); // l3.1 l3.2 l3.3
 //
       if (iterNum >= maxIterations) { // l4
-          throw new RootNotFound(); // t2
+          throw new MaxIterationsPassed(); // t2
       }
       
       return mid;
@@ -111,5 +113,10 @@ public class Bisect {
    
    public class RootNotFound extends Exception {
 	   
+   }
+
+   // adding additional exception for easier validation of branch coverage
+   public class MaxIterationsPassed extends Exception {
+
    }
 }

@@ -101,47 +101,47 @@ public class BisectTest {
     }
 
     @Test(expected = Bisect.RootNotFound.class)
-    public void test_RootNotFoundDuringIter() throws Bisect.RootNotFound {
+    public void test_RootNotFoundDuringIter() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // no loops
         // throws immediately
         bisect.run(1, 2);
     }
 
-    @Test(expected = Bisect.RootNotFound.class)
-    public void test_RootNotFoundAfterIter() throws Bisect.RootNotFound {
+    @Test(expected = Bisect.MaxIterationsPassed.class)
+    public void test_RootNotFoundAfterIter() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // too many loops
-        // throws after do loop
+        // throws MaxIterationsPassed after do loop
         bisect.run(20, -1000000000);
     }
 
     @Test
-    public void test_IterX1X1Mid() throws Bisect.RootNotFound {
+    public void test_IterX1X1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // two loops
-        // x1 = mid
-        // x1 = mid
+        // 1. x1 = mid
+        // 2. x1 = mid
         bisect.run(-2, 2);
     }
 
     @Test
-    public void test_IterX2X1Mid() throws Bisect.RootNotFound {
-        // two loop
-        // x2 = mid
-        // x1 = mid
+    public void test_IterX2X1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x2 = mid
+        // 2. x1 = mid
         bisect.run(2, -2);
     }
 
     @Test
-    public void test_IterX1Mid() throws Bisect.RootNotFound {
+    public void test_IterX1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // one loop
-        // x1 = mid
+        // 1. x1 = mid
         bisect.run(-2, 4);
     }
 
     @Test
-    public void test_IterX1X2Mid() throws Bisect.RootNotFound {
-        // two loop
-        // x1 = mid
-        // x2 = mid
+    public void test_IterX1X2Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // two loops
+        // 1. x1 = mid
+        // 2. x2 = mid
         bisect.run(-2, 1);
     }
 }

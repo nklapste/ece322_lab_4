@@ -11,7 +11,8 @@ public class Main {
 		double result = 0;
 		try {
 			result = b.run(-10, 10);
-		} catch (Bisect.RootNotFound e) {
+			// modifying source code for easier branch coverage identification
+		} catch (Bisect.RootNotFound | Bisect.MaxIterationsPassed e) {
 			e.printStackTrace();
 		}
 		System.out.println("Root found at:" + result);
