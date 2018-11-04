@@ -20,7 +20,7 @@ public class BisectTest {
      * Thus, running {@code Biesect.run(x1, x2)} should solve the equation f(x)=0 which should result in x=1.
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         // same definition as defined in main
         bisect = new Bisect(
                 new Bisect.polynomial() {
@@ -33,7 +33,7 @@ public class BisectTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         bisect = null;
     }
 
