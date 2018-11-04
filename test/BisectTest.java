@@ -13,6 +13,12 @@ public class BisectTest {
 
     private Bisect bisect;
 
+    /**
+     * Setup Biesect with its default {@code tol} and {@code maxIter} values (0.000001 and 50 respectfully) and
+     * define the polynomial to solve to be f(x)=x-1.
+     *
+     * Thus, running {@code Biesect.run(x1, x2)} should solve the equation f(x)=0 which should result in x=1.
+     */
     @Before
     public void setUp() throws Exception {
         // same definition as defined in main
@@ -31,12 +37,16 @@ public class BisectTest {
         bisect = null;
     }
 
+    /* -- below is tests on {@code Bisect}'s constructors, getters, and setters -- */
+
+    /**
+     * Test Biesect's overloading constructor with a {@code tol} specified.
+     */
     @Test
     public void test_constructor1() {
         bisect = new Bisect(
                 0.5,
                 new Bisect.polynomial() {
-                    //Define your function here:
                     public double eval(double value) {
                         return value - 1;
                     }
@@ -47,13 +57,15 @@ public class BisectTest {
 
     }
 
+    /**
+     * Test Biesect's overloading constructor with a {@code tol} and {@code maxIter} specified.
+     */
     @Test
     public void test_constructor2() {
         bisect = new Bisect(
                 100,
                 100,
                 new Bisect.polynomial() {
-                    //Define your function here:
                     public double eval(double value) {
                         return value - 1;
                     }
@@ -63,12 +75,14 @@ public class BisectTest {
         assertEquals(100, bisect.getMaxIterations(), 10);
     }
 
+    /**
+     * Test Biesect's overloading constructor with a {@code maxIter} specified.
+     */
     @Test
     public void test_constructor3() {
         bisect = new Bisect(
                 10,
                 new Bisect.polynomial() {
-                    //Define your function here:
                     public double eval(double value) {
                         return value - 1;
                     }
@@ -100,6 +114,10 @@ public class BisectTest {
         assertEquals(100, bisect.getMaxIterations(), 10);
     }
 
+    /* -- constructors, getters, and setters tests are now done -- */
+
+    /* -- below is tests actually testing the {@code Bisect.run(x1, x2)} functionality -- */
+
     @Test(expected = Bisect.RootNotFound.class)
     public void test_RootNotFoundDuringIter() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // no loops
@@ -127,7 +145,8 @@ public class BisectTest {
         // two loops
         // 1. x1 = mid
         // 2. x1 = mid
-        bisect.run(-2, 2);
+        double result = bisect.run(-2, 2);
+        assertEquals(1, result, bisect.getTolerance());
     }
 
     @Test
@@ -135,14 +154,16 @@ public class BisectTest {
         // two loops
         // 1. x2 = mid
         // 2. x1 = mid
-        bisect.run(2, -2);
+        double result = bisect.run(2, -2);
+        assertEquals(1, result, bisect.getTolerance());
     }
 
     @Test
     public void test_IterX1Mid() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // one loop
         // 1. x1 = mid
-        bisect.run(-2, 4);
+        double result = bisect.run(-2, 4);
+        assertEquals(1, result, bisect.getTolerance());
     }
 
     @Test
@@ -150,6 +171,7 @@ public class BisectTest {
         // two loops
         // 1. x1 = mid
         // 2. x2 = mid
-        bisect.run(-2, 1);
+        double result = bisect.run(-2, 1);
+        assertEquals(1, result, bisect.getTolerance());
     }
 }
