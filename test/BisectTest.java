@@ -2,7 +2,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUNIT4 tests for Bisect.
@@ -16,14 +16,14 @@ public class BisectTest {
     @Before
     public void setUp() throws Exception {
         // same definition as defined in main
-       bisect =  new Bisect(
-               new Bisect.polynomial() {
-                   //Define your function here:
-                   public double eval(double value) {
-                       return value - 1;
-                   }
-               }
-       );
+        bisect = new Bisect(
+                new Bisect.polynomial() {
+                    //Define your function here:
+                    public double eval(double value) {
+                        return value - 1;
+                    }
+                }
+        );
     }
 
     @After
@@ -32,8 +32,8 @@ public class BisectTest {
     }
 
     @Test
-    public void test_constructor1(){
-        bisect =  new Bisect(
+    public void test_constructor1() {
+        bisect = new Bisect(
                 0.5,
                 new Bisect.polynomial() {
                     //Define your function here:
@@ -43,13 +43,13 @@ public class BisectTest {
                 }
         );
         assertEquals(0.5, bisect.getTolerance(), 10);
-        assertEquals(50 , bisect.getMaxIterations(), 10);
+        assertEquals(50, bisect.getMaxIterations(), 10);
 
     }
 
     @Test
-    public void test_constructor2(){
-        bisect =  new Bisect(
+    public void test_constructor2() {
+        bisect = new Bisect(
                 100,
                 100,
                 new Bisect.polynomial() {
@@ -59,13 +59,13 @@ public class BisectTest {
                     }
                 }
         );
-        assertEquals(100 , bisect.getTolerance(), 10);
-        assertEquals(100 , bisect.getMaxIterations(), 10);
+        assertEquals(100, bisect.getTolerance(), 10);
+        assertEquals(100, bisect.getMaxIterations(), 10);
     }
 
     @Test
-    public void test_constructor3(){
-        bisect =  new Bisect(
+    public void test_constructor3() {
+        bisect = new Bisect(
                 10,
                 new Bisect.polynomial() {
                     //Define your function here:
@@ -74,8 +74,8 @@ public class BisectTest {
                     }
                 }
         );
-        assertEquals(0.000001 , bisect.getTolerance(), 10);
-        assertEquals(10 , bisect.getMaxIterations(), 10);
+        assertEquals(0.000001, bisect.getTolerance(), 10);
+        assertEquals(10, bisect.getMaxIterations(), 10);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class BisectTest {
     @Test
     public void setTolerance() {
         bisect.setTolerance(100);
-        assertEquals(100, bisect.getTolerance(),10);
+        assertEquals(100, bisect.getTolerance(), 10);
     }
 
     @Test
