@@ -108,10 +108,18 @@ public class BisectTest {
     }
 
     @Test(expected = Bisect.MaxIterationsPassed.class)
-    public void test_RootNotFoundAfterIter() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+    public void test_MaxIterationsPassed1() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
         // too many loops
         // throws MaxIterationsPassed after do loop
         bisect.run(20, -1000000000);
+    }
+
+    @Test(expected = Bisect.MaxIterationsPassed.class)
+    public void test_MaxIterationsPassed2() throws Bisect.RootNotFound, Bisect.MaxIterationsPassed {
+        // too many loops
+        // throws MaxIterationsPassed after do loop
+        bisect.setMaxIterations(1);
+        bisect.run(-2, 2);
     }
 
     @Test
