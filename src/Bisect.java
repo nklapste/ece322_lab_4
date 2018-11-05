@@ -59,21 +59,21 @@ public class Bisect {
             f1 = func.eval(x1);
             f2 = func.eval(x2);
 
-            if (f1 * f2 > 0) { // l1
-                throw new RootNotFound(); // t1
+            if (f1 * f2 > 0) { // L1
+                throw new RootNotFound(); // T1
             }
 
             mid = (x1 + x2) / 2;
             fmid = func.eval(mid);
-            if (fmid * f1 < 0) // l2
-                x2 = mid;
+            if (fmid * f1 < 0) // L2
+                x2 = mid; // x2 = med
             else
-                x1 = mid;
+                x1 = mid; // x1 = med
             iterNum++;
 
-            if (Math.abs(x1 - x2) / 2 >= tolerance) { //l3.1
-                if (Math.abs(fmid) > tolerance) { // l3.2
-                    if (iterNum <= maxIterations) { // l3.3
+            if (Math.abs(x1 - x2) / 2 >= tolerance) { //L3.1
+                if (Math.abs(fmid) > tolerance) { // L3.2
+                    if (iterNum <= maxIterations) { // L3.3
                         continue;
                     }
                     break;
@@ -83,25 +83,26 @@ public class Bisect {
             break;
         }
 
-//      do { // d1
+        // original do loop
+//      do {
 //         f1 = func.eval(x1);
 //         f2 = func.eval(x2);
 //
-//         if (f1 * f2 > 0) { // l1
-//            throw new RootNotFound(); // t1
+//         if (f1 * f2 > 0) { // L1
+//            throw new RootNotFound(); // T1
 //         }
 //
 //         mid = (x1 + x2) / 2;
 //         fmid = func.eval(mid);
-//         if (fmid * f1 < 0) // l2
-//            x2 = mid;
+//         if (fmid * f1 < 0) // L2
+//            x2 = mid; // x2 = mid
 //         else
-//            x1 = mid;
+//            x1 = mid; // x1 = mid
 //         iterNum++;
-//      } while (Math.abs(x1 - x2) / 2 >= tolerance && Math.abs(fmid) > tolerance && iterNum <= maxIterations); // l3.1 l3.2 l3.3
+//      } while (Math.abs(x1 - x2) / 2 >= tolerance && Math.abs(fmid) > tolerance && iterNum <= maxIterations); // L3.1 L3.2 L3.3
 //
-        if (iterNum >= maxIterations) { // l4
-            throw new MaxIterationsPassed(); // t2
+        if (iterNum >= maxIterations) { // L4
+            throw new MaxIterationsPassed(); // T2
         }
 
         return mid;

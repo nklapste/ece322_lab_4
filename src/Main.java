@@ -12,10 +12,10 @@ public class Main {
         try {
             result = b.run(-10, 10);
             // modifying source code for easier branch coverage identification
-        } catch (Bisect.RootNotFound | Bisect.MaxIterationsPassed e) {
+        } catch (Bisect.RootNotFound | Bisect.MaxIterationsPassed e) { // catch
             e.printStackTrace();
         }
-        System.out.println("Root found at:" + result);
+        System.out.println("Root found at:" + result); // print result
 
     }
 
